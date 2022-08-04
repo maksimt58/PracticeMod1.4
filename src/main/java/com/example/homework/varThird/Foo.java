@@ -17,9 +17,10 @@ public class Foo {
             Thread.sleep(100);
             lock.lock();
             print("second");
-            lock.unlock();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }finally {
+            lock.unlock();
         }
     }
 
@@ -28,9 +29,10 @@ public class Foo {
             Thread.sleep(150);
             lock.lock();
             print(" third");
-            lock.unlock();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }finally {
+            lock.unlock();
         }
     }
 
