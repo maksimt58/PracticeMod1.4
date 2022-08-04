@@ -23,6 +23,6 @@ public class Main {
             foo.first(t1);
         });
 
-        Thread.sleep(3000);
+        Thread.sleep(1000);
     }
 }

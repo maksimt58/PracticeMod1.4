@@ -14,7 +14,7 @@ public class Foo {
 
     public void second(Runnable r) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
             lock.lock();
             print("second");
             lock.unlock();
@@ -25,7 +25,7 @@ public class Foo {
 
     public void third(Runnable r) {
         try {
-            Thread.sleep(1500);
+            Thread.sleep(150);
             lock.lock();
             print(" third");
             lock.unlock();
