@@ -1,39 +1,43 @@
 package com.example.homework.varThird;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Foo {
 
-    ReentrantLock lock = new ReentrantLock();
+    Semaphore s1 = new Semaphore(1);
+    Semaphore s2 = new Semaphore(0);
+    Semaphore s3 = new Semaphore(0);
 
     public void first(Runnable r) {
-        lock.lock();
+        try {
+            s1.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         print("first ");
-        lock.unlock();
+        s2.release();
     }
 
     public void second(Runnable r) {
         try {
-            Thread.sleep(100);
-            lock.lock();
-            print("second");
+            s2.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
-            lock.unlock();
         }
+        print("second");
+        s3.release();
     }
 
     public void third(Runnable r) {
         try {
-            Thread.sleep(150);
-            lock.lock();
-            print(" third");
+            s3.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
-            lock.unlock();
         }
+        print(" third");
+        s1.release();
+
     }
 
     protected void print(String str) {
